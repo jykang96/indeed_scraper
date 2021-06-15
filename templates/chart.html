@@ -57,6 +57,8 @@
         </div>
         <div id="summary">
             <h2>Summary</h2>
+            <p id="totalJobNumber"></p>
+            <p id="commonSalary"></p>
         </div>
     </div>
 
@@ -168,11 +170,14 @@
         dateG++;
         }
     }
+
     let ChartOne = document.getElementById('myChart').getContext('2d');
     let ChartTwo = document.getElementById('myChartTwo').getContext('2d');
     let ChartThree = document.getElementById('myChartThree').getContext('2d');
     document.getElementById('nonReportedSalary').innerHTML = `Number of unspecified salary range: ${salaryNotPosted}`
     document.getElementById('jobPostings').innerHTML = `Number of job postings in the past 30 days: ${jobs.length - dateG}`
+    document.getElementById('totalJobNumber').innerHTML = `- A total number of ${jobs.length} jobs have been found`
+    document.getElementById('commonSalary').innerHTML = `- The most common salary range for this job is 100`
     let salaryChart = new Chart(ChartOne, {
         type: 'bar', // bar, horizontalbar, pie, line, doughnut, radar, polarArea... many types of graphs
         data: {
