@@ -9,6 +9,7 @@ import json
 
 app = Flask(__name__)
 
+
 dummy = [('Sales Representative, Fabric Digital Services', 'Fabric Inc.', 'Toronto, ON', '30+ days ago', '2021-06-10', 'Reports to: Head of Fabric Digital Services. This is showcased in our products that rely on microservices, APIs, and easy integrations, and in our globally…', '', 'https://ca.indeed.com/rc/clk?jk=294eeb428427cb4e&fccid=83986ff6edcf112e&vjs=3'),
          ('Senior Sales Representative', 'Food Decision Software', 'Richmond Hill, ON', '30+ days ago', '2021-06-10', 'Through a long history of success, strong brand awareness, and effective social media marketing we have a large target list of accounts ready for sales…', '', 'https://ca.indeed.com/rc/clk?jk=e001ff959f4178fa&fccid=b66de16a7a2e9d96&vjs=3')]
 
