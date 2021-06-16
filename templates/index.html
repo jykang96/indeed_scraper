@@ -47,14 +47,21 @@
                     />
                 </div>
                 <div>
-                    <input type="submit" value="Find Data!" class="w-full flex justify-center bg-indigo-500 text-gray-100 p-4  rounded-full tracking-wide
-                    font-semibold  focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg cursor-pointer transition ease-in duration-300"/>
+                    <button onclick="myFunction()" type="submit" class="w-full flex justify-center bg-indigo-500 text-gray-100 p-4  rounded-full tracking-wide
+                    font-semibold  focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg cursor-pointer transition ease-in duration-300">Find Data!</button>
                 </div>
             </form>
             {% if message %}
-                <p class="message">{{ message | safe }}</p>
+                <p id="message">{{ message | safe }}</p>
             {% endif %}
     </div>
     </div>
+    <script>
+        function myFunction(){
+            if(document.getElementById("position").value.length > 0 || document.getElementById("city").value.length > 0 || document.getElementById("province").value.length > 0){
+                document.getElementById("message").innerHTML = "Please wait... This may take up to 5 minutes"
+            }
+        }
+    </script>
 </body>
 </html>

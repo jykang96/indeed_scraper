@@ -10,49 +10,10 @@ import json
 app = Flask(__name__)
 
 
-dummy = [('Sales Representative, Fabric Digital Services', 'Fabric Inc.', 'Toronto, ON', '30+ days ago', '2021-06-10', 'Reports to: Head of Fabric Digital Services. This is showcased in our products that rely on microservices, APIs, and easy integrations, and in our globally…', '', 'https://ca.indeed.com/rc/clk?jk=294eeb428427cb4e&fccid=83986ff6edcf112e&vjs=3'),
-         ('Senior Sales Representative', 'Food Decision Software', 'Richmond Hill, ON', '30+ days ago', '2021-06-10', 'Through a long history of success, strong brand awareness, and effective social media marketing we have a large target list of accounts ready for sales…', '', 'https://ca.indeed.com/rc/clk?jk=e001ff959f4178fa&fccid=b66de16a7a2e9d96&vjs=3')]
-
-
-# class JobData(db.Model):
-#     __tablename__ = 'job data'
-#     id = db.Column(db.Integer, primary_key=True)
-#     job_title = db.Column(db.String(200))
-#     company_name = db.Column(db.String(200))
-#     job_location = db.Column(db.String(200))
-#     post_date = db.Column(db.Text())
-#     salary_show = db.Column(db.String(200))
-
-#     def __init__(self, job_title, company_name, job_location, post_date, salary_show):
-#         self.job_title = job_title
-#         self.company_name = company_name
-#         self.job_location = job_location
-#         self.post_date = post_date
-#         self.salary_show = salary_show
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
-# @app.route('/submit', methods=["GET", "POST"])
-# def submit():
-#     if request.method == "POST":
-#         position = request.form['position']
-#         city = request.form['city']
-#         province = request.form['province']
-#         region = request.form['region']
-#         location = '{}-{}'
-#         location = location.format(city, province)
-#         jobs = main(position, location, region)
-#         data = {
-#             "jobs": jobs
-#         }
-#         print(data)
-#         if position == '' or city == '':
-#             return render_template('index.html', message='Please enter required fields')
-#         return data
 
 @app.route('/submit', methods=["GET", "POST"])
 def submit():
