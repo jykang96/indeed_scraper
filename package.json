@@ -1,0 +1,23 @@
+{
+  "name": "indeed_scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwind build src/style.css -o templates/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jykang96/indeed_scraper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jykang96/indeed_scraper/issues"
+  },
+  "homepage": "https://github.com/jykang96/indeed_scraper#readme",
+  "dependencies": {
+    "tailwindcss": "^2.1.4"
+  }
+}
