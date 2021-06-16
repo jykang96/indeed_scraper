@@ -9,59 +9,121 @@
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
-    <style>
-        .grid-container{
-        display: grid;
-        grid-template-columns: auto auto;
-        justify-items: center;
-        align-items: center;
-        grid-template-rows: auto 500px 650px;
-        grid-template-columns: auto auto;
-        padding-left: 35px;
-        padding-right: 35px;
-        font-family: Tahoma, sans-serif;
-        }
-        #title{
-            grid-area: 1 / 1 / span 1 / span 2;
-        }
-        #chart{
-            text-align: left !important;
-            width: 800px;
-            height: 400px;
-        }
-        #summary{
-            text-align: justify !important;
-            width: 800px;
-            height: 400px;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/styles/style.css" />
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
-<body style="background-color: #B0C4DE">
-    <div class="grid-container">
-        <div id="title">
-            <h1>{{ position }} Job Information In {{ location }} Area</h1>
-        </div>
-        <div id="chart">
-            <h2>Salary Range</h2>
-            <p id="nonReportedSalary"></p>
-            <canvas id="myChart"></canvas>
-        </div>
-        <div id="chart">
-            <h2>Job Posted Dates</h2>
-            <p id="jobPostings"></p>
-            <canvas id="myChartTwo"></canvas>
-        </div>
-        <div id="chart">
-            <h2>Full vs Part Time Ratio</h2>
-            <canvas id=myChartThree></canvas>
-        </div>
-        <div id="summary">
-            <h2>Summary</h2>
-            <p id="totalJobNumber"></p>
-            <p id="commonSalary"></p>
+<body class="bg-blue-500">
+    <div class="grid mb-4 pb-10 px-8 mx-4 rounded-3xl bg-gray-50">
+        <div class="grid grid-cols-12 gap-6">
+            <div class="grid grid-cols-12 col-span-12 gap-6 xxl:col-span-9">
+                <div class="col-span-12 mt-8">
+                    <h2 class="text-4xl font-medium text-center pb-4 font-sans-serif-Roboto">{{ position }} Job Information In {{ location }} Area</h2>
+                    <!-- Top summaries in boxes -->
+                    <div class="grid grid-cols-12 gap-6 mt-5">
+                        <div class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+                            href="#">
+                            <div class="p-5">
+                                <div class="flex justify-between">
+                                    <span class="iconify h-7 w-7" data-icon="emojione-v1:money-bag" data-inline="false" fill="none"></span>
+                                    <div
+                                        class="bg-green-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
+                                        <span class="flex items-center">This is where low-average-high will go</span>
+                                    </div>
+                                </div>
+                                <div class="ml-2 w-full flex-1">
+                                    <div>
+                                        <div class="mt-3 text-3xl font-bold leading-8">$30k ~ $45k</div>
+
+                                        <div class="mt-1 text-base text-gray-600">Most Common Salary Range</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+                            href="#">
+                            <div class="p-5">
+                                <div class="flex justify-between">
+                                    <span class="iconify h-7 w-7" data-icon="emojione:spiral-calendar" data-inline="false"></span>
+                                    <div
+                                        class="bg-red-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
+                                        <span class="flex items-center">Active career market</span>
+                                    </div>
+                                </div>
+                                <div class="ml-2 w-full flex-1">
+                                    <div>
+                                        <div class="mt-3 text-3xl font-bold leading-8">5</div>
+
+                                        <div class="mt-1 text-base text-gray-600">Job postings in the past 30 days</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+                            href="#">
+                            <div class="p-5">
+                                <div class="flex justify-between">
+                                    <span class="iconify h-7 w-7 text-blue-400" data-icon="whh:workshirt" data-inline="false"></span>
+                                    <div
+                                        class="bg-yellow-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
+                                        <span class="flex items-center">part vs full</span>
+                                    </div>
+                                </div>
+                                <div class="ml-2 w-full flex-1">
+                                    <div>
+                                        <div class="mt-3 text-3xl font-bold leading-8">Full-Time</div>
+
+                                        <div class="mt-1 text-base text-gray-600">Most common employment type</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+                            href="#">
+                            <div class="p-5">
+                                <div class="flex justify-between">
+                                    <span class="iconify h-7 w-7 text-blue-400" data-icon="vaadin:line-bar-chart" data-inline="false"></span>
+                                    <div
+                                        class="bg-blue-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
+                                        <span class="flex items-center">Total Number of Jobs</span>
+                                    </div>
+                                </div>
+                                <div class="ml-2 w-full flex-1">
+                                    <div>
+                                        <div class="mt-3 text-3xl font-bold leading-8">150</div>
+
+                                        <div class="mt-1 text-base text-gray-600">Jobs in the Area</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- top box summaries end here -->
+                    <div class="col-span-12 mt-5">
+                        <div class="grid gap-2 grid-cols-1 lg:grid-cols-2">
+                            <!-- salary graph -->
+                            <div id="chart" class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white">
+                                <h2 class ="mt-3 text-3xl font-bold leading-8 text-center py-5">Salary Range</h2>
+                                <div id="salaryGraph"></div>
+                            </div>
+                            <!-- job postings graph -->
+                            <div id="chart" class="shadow-xl rounded-lg intro-y bg-white">
+                                <h2 class ="mt-3 text-3xl font-bold leading-8 pb-5 text-center">Job Posted Dates</h2>
+                                <div id="jobPostingGraph"></div>
+                            </div>
+                            <!-- full vs part time graph -->
+                            <div id="chart" class="shadow-xl rounded-lg intro-y bg-white">
+                                <h2 class ="mt-3 text-3xl font-bold leading-8 pb-5 text-center">Full vs Part Time Ratio</h2>
+                                <div id="fullPartGraph"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
+    <!-- script for salary range bar graph -->
     <script type="text/javascript">
         function salaryGraphAdder(salary){
             //if-immediate
@@ -170,56 +232,57 @@
         dateG++;
         }
     }
-
-    let ChartOne = document.getElementById('myChart').getContext('2d');
-    let ChartTwo = document.getElementById('myChartTwo').getContext('2d');
-    let ChartThree = document.getElementById('myChartThree').getContext('2d');
-    document.getElementById('nonReportedSalary').innerHTML = `Number of unspecified salary range: ${salaryNotPosted}`
-    document.getElementById('jobPostings').innerHTML = `Number of job postings in the past 30 days: ${jobs.length - dateG}`
-    document.getElementById('totalJobNumber').innerHTML = `- A total number of ${jobs.length} jobs have been found`
-    document.getElementById('commonSalary').innerHTML = `- The most common salary range for this job is 100`
-    let salaryChart = new Chart(ChartOne, {
-        type: 'bar', // bar, horizontalbar, pie, line, doughnut, radar, polarArea... many types of graphs
-        data: {
-            labels: ['$0 ~ $15k', '$15k ~ $30k', '$30k ~ $45k', '$45k ~ $60k', '$60k ~ $75k', '$75k ~ $90k', '$90k ~ $100k+'],
-            datasets:[{
-                label: 'Companies',
-                data:[
-                    salaryA,
-                    salaryB,
-                    salaryC,
-                    salaryD,
-                    salaryE,
-                    salaryF,
-                    salaryG
-                ],
-                backgroundColor: [
-                    '#decab0'
-                ],
-                borderWidth: 1.5,
-                borderColor: '#777',
-                hoverBorderWidth: 4,
-                hoverBorderColor: '#4C516D'
-            }]
+    </script>
+    <script type="text/javascript">
+        var options = {
+          series: [{
+            name: 'Number of cases',
+            data: [                    
+                salaryA,
+                salaryB,
+                salaryC,
+                salaryD,
+                salaryE,
+                salaryF,
+                salaryG]
+            }],
+          chart: {
+          type: 'bar',
+          height: 400
         },
-        options: {
-            scales: {
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        beginAtZero: true
+        plotOptions: {
+          bar: {
+            borderRadius: 4
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        xaxis: {
+          categories: ['$0 ~ $15k', '$15k ~ $30k', '$30k ~ $45k', '$45k ~ $60k', '$60k ~ $75k', '$75k ~ $90k', '$90k ~ $100k+'],
+        },
+        tooltip: {
+                shared: true,
+                intersect: false,
+                y: {
+                    formatter: function(y) {
+                        if (typeof y !== "undefined") {
+                            return y.toFixed(0);
+                        }
+                        return y;
                     }
-                }]
+                }
             }
-        }
-    });
-    let postDateChart = new Chart(ChartTwo, {
-        type: 'line', // bar, horizontalbar, pie, line, doughnut, radar, polarArea... many types of graphs
-        data: {
-            labels: ['Today','Past 5 days', '5 ~ 10 days ago', '10 ~ 15 days ago', '15 ~ 20 days ago', '20 ~ 25 days ago', '25 ~ 30 days ago', '30+ days ago'],
-            datasets:[{
-                label: 'Number of occurances',
-                data:[
+        };
+        var chart = new ApexCharts(document.querySelector("#salaryGraph"), options);
+        chart.render();
+    </script>
+    <!-- script for job posted dates line graph -->
+    <script type="text/javascript">
+        var options = {
+            series: [{
+                name: 'Job Posting',
+                data: [
                     dateToday,
                     dateA,
                     dateB,
@@ -228,49 +291,81 @@
                     dateE,
                     dateF,
                     dateG
-                ],
-                backgroundColor: [
-                    '#decab0'
-                ],
-                borderWidth: 1.5,
-                borderColor: '#777',
-                hoverBorderWidth: 4,
-                hoverBorderColor: '#4C516D'
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        beginAtZero: true
+                ]
+            }],
+            chart: {
+                height: 350,
+                type: 'area',
+                zoom: {
+                    enabled: false
+                },
+            },
+            stroke: {
+                show: true,
+                curve: 'smooth',
+                lineCap: 'butt',
+                colors: undefined,
+                width: 3.5,
+                dashArray: 0, 
+            },
+            fill: {
+                type: "gradient",
+                gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0.7,
+                opacityTo: 0.9,
+                stops: [0, 90, 100]
+                }
+            },
+            labels: ['Today','Past 5 days', '5 ~ 10 days ago', '10 ~ 15 days ago', '15 ~ 20 days ago', '20 ~ 25 days ago', '25 ~ 30 days ago', '30+ days ago'],
+            markers: {
+                size: 0
+            },
+            yaxis: [{
+                    title: {
+                        text: 'Number of Job Postings',
+                    },
+                },
+            ],
+            tooltip: {
+                shared: true,
+                intersect: false,
+                y: {
+                    formatter: function(y) {
+                        if (typeof y !== "undefined") {
+                            return y.toFixed(0) + " jobs posted";
+                        }
+                        return y;
                     }
-                }]
+                }
             }
+        };
+        var chart = new ApexCharts(document.querySelector("#jobPostingGraph"), options);
+        chart.render();
+    </script>
+    <!-- script for full vs part time ratio -->
+    <script type="text/javascript">
+        var options = {
+          series: [53, 32],
+          chart: {
+          width: 480,
+          type: 'pie',
+        },
+        labels: ['Full-Time', 'Part-Time'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+        legend: {
+            position: 'bottom'
         }
-    });
-    //third chart
-    let fullPartChart = new Chart(ChartThree, {
-        type: 'pie', // bar, horizontalbar, pie, line, doughnut, radar, polarArea... many types of graphs
-        data: {
-            labels: ['Part', 'Full'],
-            datasets:[{
-                label: 'Number of occurances',
-                data:[
-                    1,
-                    2
-                ],
-                backgroundColor: [
-                    '#decab0',
-                    '#b0dbde'
-                ],
-                borderWidth: 1.5,
-                borderColor: '#777',
-                hoverBorderWidth: 4,
-                hoverBorderColor: '#4C516D'
-            }]
-        }
-    });
+          }
+        }]
+        };
+        var chart = new ApexCharts(document.querySelector("#fullPartGraph"), options);
+        chart.render();
     </script>
     
 </body>
