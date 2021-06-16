@@ -19,7 +19,7 @@
         <div class="grid grid-cols-12 gap-6">
             <div class="grid grid-cols-12 col-span-12 gap-6 xxl:col-span-9">
                 <div class="col-span-12 mt-8">
-                    <h2 class="text-4xl font-medium text-center pb-4 font-sans-serif-Roboto">{{ position }} Job Information In {{ location }} Area</h2>
+                    <h2 class="text-4xl font-medium text-center pb-4 font-sans-serif-Roboto">{{ position }} Jobs In {{ location }} Area</h2>
                     <!-- Top summaries in boxes -->
                     <div class="grid grid-cols-12 gap-6 mt-5">
                         <div class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
@@ -29,13 +29,12 @@
                                     <span class="iconify h-7 w-7" data-icon="emojione-v1:money-bag" data-inline="false" fill="none"></span>
                                     <div
                                         class="bg-green-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
-                                        <span class="flex items-center">This is where low-average-high will go</span>
+                                        <span id="salaryLevel" class="flex items-center"></span>
                                     </div>
                                 </div>
                                 <div class="ml-2 w-full flex-1">
                                     <div>
-                                        <div class="mt-3 text-3xl font-bold leading-8">$30k ~ $45k</div>
-
+                                        <div id="salaryRange" class="mt-3 text-3xl font-bold leading-8"></div>
                                         <div class="mt-1 text-base text-gray-600">Most Common Salary Range</div>
                                     </div>
                                 </div>
@@ -48,12 +47,12 @@
                                     <span class="iconify h-7 w-7" data-icon="emojione:spiral-calendar" data-inline="false"></span>
                                     <div
                                         class="bg-red-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
-                                        <span class="flex items-center">Active career market</span>
+                                        <span id="jogActiveLevel" class="flex items-center"></span>
                                     </div>
                                 </div>
                                 <div class="ml-2 w-full flex-1">
                                     <div>
-                                        <div class="mt-3 text-3xl font-bold leading-8">5</div>
+                                        <div id="postingsNumber"class="mt-3 text-3xl font-bold leading-8"></div>
 
                                         <div class="mt-1 text-base text-gray-600">Job postings in the past 30 days</div>
                                     </div>
@@ -91,7 +90,7 @@
                                 </div>
                                 <div class="ml-2 w-full flex-1">
                                     <div>
-                                        <div class="mt-3 text-3xl font-bold leading-8">150</div>
+                                        <div id="totalJob" class="mt-3 text-3xl font-bold leading-8"></div>
 
                                         <div class="mt-1 text-base text-gray-600">Jobs in the Area</div>
                                     </div>
@@ -105,6 +104,7 @@
                             <!-- salary graph -->
                             <div id="chart" class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white">
                                 <h2 class ="mt-3 text-3xl font-bold leading-8 text-center py-5">Salary Range</h2>
+                                <p id="unspecified_salary" class="mt-1 text-base text-gray-600 px-4"></p>
                                 <div id="salaryGraph"></div>
                             </div>
                             <!-- job postings graph -->
@@ -233,6 +233,7 @@
         }
     }
     </script>
+
     <script type="text/javascript">
         var options = {
           series: [{
@@ -366,6 +367,61 @@
         };
         var chart = new ApexCharts(document.querySelector("#fullPartGraph"), options);
         chart.render();
+    </script>
+
+    <script>
+        const salaryArray = [salaryA, salaryB, salaryC, salaryD, salaryE, salaryF, salaryG];
+        let max = 0;
+        for(var i = 0; i<salaryArray.length; i++){
+            if(max < salaryArray[i]){
+                max = salaryArray[i];
+            }
+        }
+        if(max == salaryArray[0] || max == salaryArray[1]){
+            document.getElementById("salaryLevel").innerHTML = 'Low Salary Level'
+        }
+        else if(max == salaryArray[2] || max == salaryArray[3] || max == salaryArray[4]){
+            document.getElementById("salaryLevel").innerHTML = 'Medium Salary Level'
+        }
+        else{
+            document.getElementById("salaryLevel").innerHTML = 'High Salary Level'
+        }
+        for(var i = 0; i<salaryArray.length; i++){
+            if(max == salaryArray[0]){
+                document.getElementById("salaryRange").innerHTML = '$0 ~ $15k'
+            }
+            else if(max == salaryArray[1]){
+                document.getElementById("salaryRange").innerHTML = '$15k ~ $30k'
+            }
+            else if(max == salaryArray[2]){
+                document.getElementById("salaryRange").innerHTML = '$30k ~ $45k'
+            }
+            else if(max == salaryArray[3]){
+                document.getElementById("salaryRange").innerHTML = '$45k ~ $60k'
+            }
+            else if(max == salaryArray[4]){
+                document.getElementById("salaryRange").innerHTML = '$60k ~ $75k'
+            }
+            else if(max == salaryArray[5]){
+                document.getElementById("salaryRange").innerHTML = '$75k ~ $90k'
+            }
+            else{
+                document.getElementById("salaryRange").innerHTML = '$90k ~ $100k+'
+            }
+        }
+        let postingNumber = dateToday + dateA + dateB + dateC + dateD + dateE + dateF
+        document.getElementById("postingsNumber").innerHTML = postingNumber
+        if(postingNumber < 500){
+            document.getElementById("jogActiveLevel").innerHTML = 'Not So Active'
+        }
+        else if(postingNumber >= 500 && postingNumber < 1000){
+            document.getElementById("jogActiveLevel").innerHTML = 'Moderately Active'
+        }
+        else{
+            document.getElementById("jogActiveLevel").innerHTML = 'Highly Active'
+        }   
+        document.getElementById("totalJob").innerHTML = jobs.length
+        document.getElementById("unspecified_salary").innerHTML = `Total number of unspecified salary range: ${(jobs.length - (salaryA + salaryB + salaryC + salaryD + salaryE + salaryF + salaryG))}`
     </script>
     
 </body>
