@@ -61,14 +61,15 @@ def submit():
         city = request.form['city']
         province = request.form['province']
         region = request.form['region']
-        location = '{}-{}'
-        location = location.format(city, province)
-        jobs = main(position, location, region)
-        print(len(jobs))
-        data = json.dumps(jobs)
-        if position == '' or city == '':
-            return render_template('index.html', message='Please enter required fields')
-        return render_template('chart.html', data=data, location=location, position=position)
+        if position == '' or city == '' or province == '':
+            return render_template('index.html', message='Please enter all required fields')
+        else:
+            location = '{}-{}'
+            location = location.format(city, province)
+            jobs = main(position, location, region)
+            print(len(jobs))
+            data = json.dumps(jobs)
+            return render_template('chart.html', data=data, location=location, position=position)
 
 
 def main(position, location, region):

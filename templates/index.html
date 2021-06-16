@@ -4,45 +4,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
     <title>indeed scraper</title>
 </head>
-<body>
-    <div class="container">
-        <form action="/submit" method="POST">
-            <h1>Indeed Scraper</h1>
-            <h2 className={classes.font}>Find Any Career Data in Your Area! (NA only)</h2>
-            <br/><br/>
-            <label for="region">Region</label>
-            <select id="region" name="region">
-                <option value="US">USA</option>
-                <option value="Canada">Canada</option>
-            </select>
-            <h2>Region: Canada</h2>
-            <label for="position">What Job position? </label>
-            <input
-                id="position"
-                name="position"
-                type="text"
-            />
-            <label for="city">Which city? </label>
-            <input
-                id="city"
-                name="city"
-                type="text"
-            />
-            <label for="province">Which province? </label>
-            <input
-                id="province"
-                name="province"
-                type="text"
-            />
-            <div>
-                <input type="submit" value="Find Data!"/>
-            </div>
-        </form>
-        {% if message %}
-            <p class="message">{{ message | safe }}</p>
-        {% endif %}
+<body class="bg-blue-">
+    <div class="relative min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover relative items-center" style="background-image: url(https://images.unsplash.com/photo-1557804506-669a67965ba0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1334&q=80);">
+        <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
+        <div class="max-w-md w-full space-y-8 p-10 bg-white rounded-xl z-10">
+            <form action="/submit" method="POST" class="mt-8 space-y-6">
+                <div class="text-center">
+                    <h1 class="mt-6 text-3xl font-bold text-gray-900">Indeed Scraper</h1>
+                    <h2 class="mt-2 text-sm text-gray-600">Find Any Career Data in Your Area! (NA only)</h2>
+                </div>
+                <div class="relative">
+                    <label for="region" class="text-m font-bold text-gray-700 tracking-wide">Region</label>
+                    <select id="region" name="region" class="py-2 border border-gray-300 text-gray-600 h-auto w-full pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                        <option value="Canada">Canada</option>
+                        <option value="US">USA</option>
+                    </select>
+                </div>
+                <div class="relative">
+                    <label for="position" class="text-m font-bold text-gray-700 tracking-wide">What Job position? </label>
+                    <input
+                        id="position"
+                        name="position"
+                        type="text"
+                        class=" w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" placeholder="Chef"
+                    />
+                    <label for="city" class="text-m font-bold text-gray-700 tracking-wide">Which city? </label>
+                    <input
+                        id="city"
+                        name="city"
+                        type="text"
+                        class=" w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" placeholder="Toronto"
+                    />
+                    <label for="province" class="text-m font-bold text-gray-700 tracking-wide">Which province? </label>
+                    <input
+                        id="province"
+                        name="province"
+                        type="text"
+                        class=" w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" placeholder="ON"
+                    />
+                </div>
+                <div>
+                    <input type="submit" value="Find Data!" class="w-full flex justify-center bg-indigo-500 text-gray-100 p-4  rounded-full tracking-wide
+                    font-semibold  focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg cursor-pointer transition ease-in duration-300"/>
+                </div>
+            </form>
+            {% if message %}
+                <p class="message">{{ message | safe }}</p>
+            {% endif %}
+    </div>
     </div>
 </body>
 </html>

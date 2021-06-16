@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraped Chart</title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
+    <style>
+        .grid-container{
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-items: center;
+        align-items: center;
+        grid-template-rows: auto 500px 650px;
+        grid-template-columns: auto auto;
+        padding-left: 35px;
+        padding-right: 35px;
+        font-family: Tahoma, sans-serif;
+        }
+        #title{
+            grid-area: 1 / 1 / span 1 / span 2;
+        }
+        #chart{
+            text-align: left !important;
+            width: 800px;
+            height: 400px;
+        }
+        #summary{
+            text-align: justify !important;
+            width: 800px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body style="background-color: #B0C4DE">
+    <div class="grid-container">
+        <div id="title">
+            <h1>{{ position }} Job Information In {{ location }} Area</h1>
+        </div>
+        <div id="chart">
+            <h2>Salary Range</h2>
+            <p id="nonReportedSalary"></p>
+            <canvas id="myChart"></canvas>
+        </div>
+        <div id="chart">
+            <h2>Job Posted Dates</h2>
+            <p id="jobPostings"></p>
+            <canvas id="myChartTwo"></canvas>
+        </div>
+        <div id="chart">
+            <h2>Full vs Part Time Ratio</h2>
+            <canvas id=myChartThree></canvas>
+        </div>
+        <div id="summary">
+            <h2>Summary</h2>
+            <p id="totalJobNumber"></p>
+            <p id="commonSalary"></p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    let ChartOne = document.getElementById('myChart').getContext('2d');
+    let ChartTwo = document.getElementById('myChartTwo').getContext('2d');
+    let ChartThree = document.getElementById('myChartThree').getContext('2d');
+    let salaryChart = new Chart(ChartOne, {
+        type: 'bar', // bar, horizontalbar, pie, line, doughnut, radar, polarArea... many types of graphs
+        data: {
+            labels: ['$0 ~ $15k', '$15k ~ $30k', '$30k ~ $45k', '$45k ~ $60k', '$60k ~ $75k', '$75k ~ $90k', '$90k ~ $100k+'],
+            datasets:[{
+                label: 'Companies',
+                data:[
+                    34,
+                    54,
+                    3,
+                    53,
+                    98,
+                    23,
+                    12
+                ],
+                backgroundColor: [
+                    '#decab0'
+                ],
+                borderWidth: 1.5,
+                borderColor: '#777',
+                hoverBorderWidth: 4,
+                hoverBorderColor: '#4C516D'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    let postDateChart = new Chart(ChartTwo, {
+        type: 'line', // bar, horizontalbar, pie, line, doughnut, radar, polarArea... many types of graphs
+        data: {
+            labels: ['Today','Past 5 days', '5 ~ 10 days ago', '10 ~ 15 days ago', '15 ~ 20 days ago', '20 ~ 25 days ago', '25 ~ 30 days ago', '30+ days ago'],
+            datasets:[{
+                label: 'Number of occurances',
+                data:[
+                    5,
+                    23,
+                    43,
+                    65,
+                    23,
+                    54,
+                    12,
+                    65
+                ],
+                backgroundColor: [
+                    '#decab0'
+                ],
+                borderWidth: 1.5,
+                borderColor: '#777',
+                hoverBorderWidth: 4,
+                hoverBorderColor: '#4C516D'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    //third chart
+    let fullPartChart = new Chart(ChartThree, {
+        type: 'pie', // bar, horizontalbar, pie, line, doughnut, radar, polarArea... many types of graphs
+        data: {
+            labels: ['Part', 'Full'],
+            datasets:[{
+                label: 'Number of occurances',
+                data:[
+                    1,
+                    2
+                ],
+                backgroundColor: [
+                    '#decab0',
+                    '#b0dbde'
+                ],
+                borderWidth: 1.5,
+                borderColor: '#777',
+                hoverBorderWidth: 4,
+                hoverBorderColor: '#4C516D'
+            }]
+        }
+    });
+    </script>
+    
+</body>
+</html>
