@@ -156,7 +156,7 @@
 
         var jobs = '{{data|safe}}'
         jobs = JSON.parse(jobs)
-        for (var i = 0; i < jobs.length; i++) {
+        for (var i = 0; i < (jobs.length-1); i++) {
             //cases where salary is unspecified
             if(jobs[i].salary === ""){
             salaryNotPosted++
@@ -203,9 +203,8 @@
                 }
             }
         }
-    console.log(salaryNotPosted);
     //loop for posted dates
-    for(var i =0; i < jobs.length; i++){
+    for(var i =0; i < (jobs.length-1); i++){
         let date = jobs[i].post_date.replace('days ago', '').replace('day ago', '').replace('Just posted', 'Today');
         if(date ==="Today"){
         dateToday++;
@@ -347,7 +346,7 @@
     <!-- script for full vs part time ratio -->
     <script type="text/javascript">
         var options = {
-          series: [53, 32],
+          series: [jobs[jobs.length-1].full_time, jobs[jobs.length-1].part_time],
           chart: {
           width: 480,
           type: 'pie',
@@ -411,17 +410,17 @@
         }
         let postingNumber = dateToday + dateA + dateB + dateC + dateD + dateE + dateF
         document.getElementById("postingsNumber").innerHTML = postingNumber
-        if(postingNumber < 500){
+        if(postingNumber < 150){
             document.getElementById("jogActiveLevel").innerHTML = 'Not So Active'
         }
-        else if(postingNumber >= 500 && postingNumber < 1000){
+        else if(postingNumber >= 150 && postingNumber < 500){
             document.getElementById("jogActiveLevel").innerHTML = 'Moderately Active'
         }
         else{
             document.getElementById("jogActiveLevel").innerHTML = 'Highly Active'
         }   
-        document.getElementById("totalJob").innerHTML = jobs.length
-        document.getElementById("unspecified_salary").innerHTML = `Total number of unspecified salary range: ${(jobs.length - (salaryA + salaryB + salaryC + salaryD + salaryE + salaryF + salaryG))}`
+        document.getElementById("totalJob").innerHTML = (jobs.length - 1)
+        document.getElementById("unspecified_salary").innerHTML = `Total number of unspecified salary range: ${((jobs.length-1) - (salaryA + salaryB + salaryC + salaryD + salaryE + salaryF + salaryG))}`
     </script>
     
 </body>

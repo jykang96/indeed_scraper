@@ -51,14 +51,15 @@
                     font-semibold  focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg cursor-pointer transition ease-in duration-300">Find Data!</button>
                 </div>
             </form>
-            {% if message %}
-                <p id="message">{{ message | safe }}</p>
-            {% endif %}
+                <p id="message"></p>
     </div>
     </div>
     <script>
         function myFunction(){
-            if(document.getElementById("position").value.length > 0 || document.getElementById("city").value.length > 0 || document.getElementById("province").value.length > 0){
+            if(document.getElementById("position").value.length > 0 && document.getElementById("city").value.length > 0 && document.getElementById("province").value.length > 0){
+                document.getElementById("message").innerHTML = "Please wait... This may take up to 5 minutes"
+            }
+            else if(document.getElementById("position").value.length == 0 || document.getElementById("city").value.length == 0 || document.getElementById("province").value.length == 0){
                 document.getElementById("message").innerHTML = "Please wait... This may take up to 5 minutes"
             }
         }

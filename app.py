@@ -23,7 +23,7 @@ def submit():
         province = request.form['province']
         region = request.form['region']
         if position == '' or city == '' or province == '':
-            return render_template('index.html', message='Please enter all required fields')
+            return render_template('index.html')
         else:
             location = '{}-{}'
             location = location.format(city, province)
@@ -37,15 +37,15 @@ def main(position, location, region):
     records = []
     url = get_url(position, location, region)
     print(url)
+    full_part = get_full_part(url)
     while True:
-        time.sleep(1)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
         cards = soup.find_all('div', 'jobsearch-SerpJobCard')
         for card in cards:
             record = get_record(card, region)
             records.append(record)
-        time.sleep(random.randint(2, 4))
+        time.sleep(random.randint(1, 3))
         if region == 'Canada':
             try:
                 url = 'https://ca.indeed.com' + \
@@ -58,7 +58,26 @@ def main(position, location, region):
                     soup.find('a', {'aria-label': 'Next'}).get('href')
             except AttributeError:
                 break
+    records.append(full_part)
     return records
+
+
+def get_full_part(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    cards = soup.find('ul', {'id': 'filter-job-type-menu'}
+                      ).find_all('a')
+    for card in cards:
+        if 'fulltime' in card.get('href'):
+            full_time = int(card.find_all('span', '')[
+                1].text.strip().strip('()'))
+        elif 'parttime' in card.get('href'):
+            part_time = int(card.find_all('span', '')[
+                1].text.strip().strip('()'))
+    return {
+        "full_time": full_time,
+        "part_time": part_time
+    }
 
 
 def get_record(card, region):
@@ -85,8 +104,6 @@ def get_record(card, region):
     else:
         # if salary is not found...
         salary = ''
-    # record = (job_title, company_name, job_location,
-    #           post_date, today, job_summary, salary, job_url)
     record = {
         "job_title": job_title,
         "company_name": company_name,
